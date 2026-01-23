@@ -1,4 +1,3 @@
-// src/components/Menu.jsx
 import { Link } from "react-router-dom";
 
 export default function Menu() {
@@ -17,6 +16,9 @@ export default function Menu() {
         <li style={styles.li}>
           <Link style={styles.link} to="/meus-pedidos">Meus Pedidos</Link>
         </li>
+        <li style={styles.li}>
+          <Link style={styles.link} to="/registro">Registro</Link>
+        </li>
       </ul>
     </nav>
   );
@@ -24,6 +26,8 @@ export default function Menu() {
 
 const styles = {
   nav: {
+     display: "flex",
+    justifyContent:"center",
     padding: "1rem",
     backgroundColor: "#212121",
   },
