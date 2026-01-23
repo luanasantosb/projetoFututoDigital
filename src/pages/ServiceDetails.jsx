@@ -1,7 +1,7 @@
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
 
-export default function ServiceDetails() {
+export default function Details() {
   const { id } = useParams();
   const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,22 +20,19 @@ export default function ServiceDetails() {
   }, [id]);
 
   if (loading) return <p>Carregando detalhes...</p>;
-  if (!service) return <p>Produto não encontrado </p>;
+
+  if (!service) return <p>Serviço não encontrado 😢</p>;
 
   return (
-    <div style={styles.container}>
-      <Link to="/">⬅ Voltar</Link>
-
-      <img src={service.image} alt={service.title} style={styles.image} />
-
+    <div>
       <h1>{service.title}</h1>
-
-      <p style={styles.description}>{service.description}</p>
-
-      <h2> R$ {service.price}</h2>
+      <img src={service.image} width={200} />
+      <p>{service.description}</p>
+      <strong>Preço: R$ {service.price}</strong>
     </div>
   );
 }
+
 
 const styles = {
   container: {

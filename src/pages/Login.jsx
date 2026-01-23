@@ -1,25 +1,30 @@
 import Menu from "../components/Menu";
-import { useEffect, useState } from "react";
 import '../styles.css';
+import { Link } from "react-router-dom";
 export default function Login() {
   return (
     <div>
-      <h1 style={styles.h1}>Login</h1>
+      <Menu />
       <div style={styles.container}>
-        
         <fieldset style={styles.fieldset}>
           <form style={styles.form}>
             <h2 style={styles.h2}>Faça seu login</h2>
+
             <label style={styles.label}>Digite seu e-mail</label>
             <input className="input" type="text" />
 
             <label style={styles.label}>Digite sua senha:</label>
-            <input className="input" type="password"/>
+            <input className="input" type="password" />
 
-            <input className="btn" type="submit" value="Logar" />
+            <input className="btn" type="submit" value="Entrar" />
+
+            <Link
+              to="/registro"
+              style={{...styles.registro,textDecoration: "none"}}>
+              Não possui uma conta? Cadastre-se aqui
+            </Link>
           </form>
 
-          <p style={styles.registro}> Não possui uma conta? Cadastre-se aqui</p>
         </fieldset>
       </div>
     </div>
@@ -27,16 +32,10 @@ export default function Login() {
 }
 
 const styles = {
-  h1: {
-    margin: "1.5rem",
-    paddingLeft: "1.5rem",
-    color: "blue",
-    textTransform: "uppercase",
-  },
   h2: {
     margin: "1.5rem",
     paddingLeft: "1.5rem",
-    color: "#FFFEF6",
+    color: "#212121",
     textTransform: "uppercase",
   },
 
@@ -46,13 +45,13 @@ const styles = {
     alignItems: "center",
     minHeight: "70vh",
   },
-  fieldset:{
+  fieldset: {
     display: "inline-block",
     width: "30%",
-    height: "auto",  
+    height: "auto",
     padding: "2rem",
-    borderRadius:"24px",
-    border:"1px solid #B22222",
+    borderRadius: "2px",
+    border: "1px solid #B22222",
   },
   form: {
     display: "flex",
@@ -60,11 +59,6 @@ const styles = {
     alignItems: "center",
     flexDirection: "column",
     gap: "1rem",
-  },
-  input: {
-    border: "none",
-    borderBottom: "1px solid red;",
-    outline: "none",
   },
   label: {
     fontSize: "1.2rem",
@@ -82,8 +76,10 @@ const styles = {
   registro:
   {
     color: "red",
-    marginTop:"1rem",
-    gap:"1.2rem",
+    marginTop: "1rem",
+    gap: "1.2rem",
     padding: "1rem 4rem",
-  }
-};
+    textDecoration: "none",
+    color: "inherit"
+  },
+}

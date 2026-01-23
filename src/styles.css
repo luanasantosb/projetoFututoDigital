@@ -5,15 +5,13 @@
 
 .input {
   border: none;
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #212121;
   outline: none;
-  background-color:#212121 ;
 }
 
 .input:focus {
   border-bottom: 2px solid #B22222;
 }
-
 
 .btn{
   background: #B22222;
@@ -25,6 +23,7 @@
   border-radius: 0.4em;
   box-shadow: 0.1em 0.1em;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn:hover {
@@ -35,4 +34,9 @@
 .btn:active {
   transform: translate(0.05em, 0.05em);
   box-shadow: 0.05em 0.05em;
+}
+
+.link-clean {
+  text-decoration: none;
+  color: inherit;
 }

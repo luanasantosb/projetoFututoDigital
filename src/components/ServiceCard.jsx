@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
 export default function ServiceCard({ service }) {
+   if (!service || !service.id) return null;
   return (
     <Link 
       to={`/service/${service.id}`} 
       style={{ textDecoration: "none", color: "inherit" }}
     >
       <div style={styles.card}>
-        <img src={service.image} alt={service.title} style={styles.image} />
         <h3>{service.title}</h3>
         <p>R$ {service.price}</p>
       </div>
