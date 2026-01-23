@@ -1,12 +1,11 @@
 import Menu from "../components/Menu";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import '../styles.css';
 export default function Registro() {
   return (
     <div>
-      <h1 style={styles.h1}>Registro</h1>
+      <Menu />
       <div style={styles.container}>
-        
         <fieldset style={styles.fieldset}>
           <form style={styles.form}>
             <h2 style={styles.h2}>Faça seu cadastro</h2>
@@ -20,6 +19,12 @@ export default function Registro() {
             <input className="input" type="password"/>
 
             <input className="btn" type="submit" value="Cadastrar" />
+              <Link
+              to="/login"
+              style={{...styles.registro,textDecoration: "none"}}>
+              Não possui uma conta? Cadastre-se aqui
+            </Link>
+
           </form>
 
         </fieldset>
