@@ -14,12 +14,12 @@ export default function Login() {
             <input className="input" type="text" />
 
             <label style={styles.label}>Digite sua senha:</label>
-            <input className="input" type="password" />
+            <input className="input" type="password"/>
 
-            <input style={styles.submit} type="submit" value="Logar" />
+            <input className="btn" type="submit" value="Logar" />
           </form>
 
-          <span>Não possui conta? Castre-se aqui!</span>
+          <p style={styles.registro}> Não possui uma conta? Cadastre-se aqui</p>
         </fieldset>
       </div>
     </div>
@@ -52,7 +52,7 @@ const styles = {
     height: "auto",  
     padding: "2rem",
     borderRadius:"24px",
-    border:"2px solid #B22222",
+    border:"1px solid #B22222",
   },
   form: {
     display: "flex",
@@ -78,5 +78,12 @@ const styles = {
     border: "none",
     borderRadius: "2px",
     fontSize: "1rem",
+  },
+  registro:
+  {
+    color: "red",
+    marginTop:"1rem",
+    gap:"1.2rem",
+    padding: "1rem 4rem",
   }
 };

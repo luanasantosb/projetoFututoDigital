@@ -1,7 +1,5 @@
-import Menu from "../components/Menu";
 import { useEffect, useState } from "react";
 import ServiceCard from "../components/ServiceCard";
-import '../styles.css';
 
 export default function Home() {
   const [services, setServices] = useState([]);
@@ -23,9 +21,7 @@ export default function Home() {
   if (loading) return <p>Carregando serviços...</p>;
 
   return (
-      <div>
-      <Menu />
-      <h1 style={styles.h1}>Página Inicial</h1>
+    <div>
       <div style={styles.grid}>
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} />
@@ -36,15 +32,12 @@ export default function Home() {
 }
 
 const styles = {
+
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
     gap: "1.5rem",
     padding: "1.5rem",
   },
-  h1:{
-    paddingLeft:"1.5rem",
-    color:"#FFFEF6",
-    textTransform:"uppercase",
-  },
 };
+

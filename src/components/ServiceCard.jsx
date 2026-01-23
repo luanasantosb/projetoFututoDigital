@@ -1,29 +1,31 @@
-// src/components/ServiceCard.jsx
+import { Link } from "react-router-dom";
+
 export default function ServiceCard({ service }) {
   return (
-    <div style={styles.card}>
-      <h3>{service.name}</h3>
-      <p>{service.description}</p>
-      <p style={styles.price}>R$ {service.price}</p>
-    </div>
+    <Link 
+      to={`/service/${service.id}`} 
+      style={{ textDecoration: "none", color: "inherit" }}
+    >
+      <div style={styles.card}>
+        <img src={service.image} alt={service.title} style={styles.image} />
+        <h3>{service.title}</h3>
+        <p>R$ {service.price}</p>
+      </div>
+    </Link>
   );
 }
 
 const styles = {
-    body:{
-        backgroundColor:"#212121",
-        color:"#fff",
-    },
   card: {
-    border: "1px solid #555",
+    border: "1px solid #ddd",
     borderRadius: "8px",
     padding: "1rem",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-    backgroundColor: "#121212",
-    color:"#fff",
+    cursor: "pointer",
   },
-  price: {
-    fontWeight: "bold",
-    marginTop: "0.5rem",
+  image: {
+    width: "100%",
+    height: "150px",
+    objectFit: "contain",
   },
 };
+
