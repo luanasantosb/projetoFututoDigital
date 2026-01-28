@@ -1,31 +1,31 @@
+import { Link } from "react-router-dom";
 import Menu from "../components/Menu";
 import '../styles.css';
-import { Link } from "react-router-dom";
+
 export default function Login() {
   return (
     <div>
       <Menu />
       <div style={styles.container}>
-        <fieldset style={styles.fieldset}>
-          <form style={styles.form}>
-            <h2 style={styles.h2}>Faça seu login</h2>
+        <form style={styles.form}>
+          <h2 style={styles.h2}>Entrar na sua conta</h2>
 
-            <label style={styles.label}>Digite seu e-mail</label>
-            <input className="input" type="text" />
+          <label htmlFor="email" style={styles.label}>
+            Digite seu e-mail</label>
+          <input id="email" type="email" placeholder="seu@email.com" />
 
-            <label style={styles.label}>Digite sua senha:</label>
-            <input className="input" type="password" />
+          <label htmlFor="senha" style={styles.label}>
+            Digite sua senha</label>
+          <input id="senha" type="password" placeholder="*********" />
 
-            <input className="btn" type="submit" value="Entrar" />
+          <button style={styles.button}>Entrar</button>
 
-            <Link
-              to="/registro"
-              style={{...styles.registro,textDecoration: "none"}}>
-              Não possui uma conta? Cadastre-se aqui
-            </Link>
-          </form>
-
-        </fieldset>
+          <Link
+            to="/registro"
+            style={{ ...styles.registro, textDecoration: "none" }}>
+            Não possui uma conta? Cadastre-se
+          </Link>
+        </form>
       </div>
     </div>
   );
@@ -43,43 +43,48 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "70vh",
-  },
-  fieldset: {
-    display: "inline-block",
-    width: "30%",
-    height: "auto",
-    padding: "2rem",
-    borderRadius: "2px",
-    border: "1px solid #B22222",
+    minHeight: "75vh",
+    padding: "1rem",
+    backgroundColor: "#f5f5f5"
   },
   form: {
+    width: "100%",
+    maxWidth: "500px",
+    backgroundColor: "#f8f8ff",
+    padding: "2.5rem",
+    borderRadius: "5px",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     flexDirection: "column",
-    gap: "1rem",
   },
+
   label: {
-    fontSize: "1.2rem",
+    fontSize: "1rem",
+    marginBottom: "0.5rem",
+    color: "#333",
   },
-  submit:
-  {
-    color: "#fffef6",
-    backgroundColor: "#B22222",
-    padding: "1rem 4rem",
-    outline: "none",
-    border: "none",
-    borderRadius: "2px",
+  input: {
+    padding: "1rem",
+    borderRadius: "5px",
+    boder: "1px solid #212121",
+    marginBottom: "1rem",
     fontSize: "1rem",
   },
-  registro:
-  {
-    color: "red",
-    marginTop: "1rem",
-    gap: "1.2rem",
-    padding: "1rem 4rem",
-    textDecoration: "none",
-    color: "inherit"
+  button: {
+    backgroundColor: "#B22",
+    color: "#f8f8ff",
+    padding: "1rem",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "1rem",
+    marginTop: "0.5rem",
+    width:"6rem",
   },
-}
+  registro: {
+    textAlign: "center",
+    marginTop:"1rem",
+    textDecoration:"none",
+    color:"#B22",
+    fontSize:"1rem",
+  },
+};

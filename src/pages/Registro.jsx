@@ -6,91 +6,94 @@ export default function Registro() {
     <div>
       <Menu />
       <div style={styles.container}>
-        <fieldset style={styles.fieldset}>
           <form style={styles.form}>
             <h2 style={styles.h2}>Faça seu cadastro</h2>
-            <label style={styles.label}>Digite nome:</label>
-            <input className="input" type="text" />
-            <label style={styles.label}>Digite seu sobrenome:</label>
-            <input className="input" type="text" />
-            <label style={styles.label}>Digite seu e-mail</label>
-            <input className="input" type="text" />
-            <label style={styles.label}>Digite sua senha:</label>
-            <input className="input" type="password"/>
+            
+            <label htmlFor="nome"style={styles.label}>Nome Completo:</label>
+            <input id="nome"type="text" value="seu nome" />
+            
+            <label htmlFor="email"style={styles.label}>Digite seu e-mail</label>
+            <input id="email" type="email" placeholder="seu@email.com" />
+            
+            <label htmlFor="senha"style={styles.label}>
+              Digite sua senha:</label>
+            <input id="senha" type="password" placeholder="Minimo 8 caracteres"/>
 
-            <input className="btn" type="submit" value="Cadastrar" />
+            <label htmlFor="confirmarSenha"style={styles.label}>
+              Confirme sua senha:</label>
+            <input id="confirmarSenha" type="password" placeholder="Repita a senha"/>
+
+            <button style={styles.button}>
+              Cadastrar
+            </button>
+              
               <Link
               to="/login"
-              style={{...styles.registro,textDecoration: "none"}}>
+              style={{...styles.login,textDecoration: "none"}}>
               Não possui uma conta? Cadastre-se aqui
             </Link>
 
           </form>
-
-        </fieldset>
+        </div>
       </div>
-    </div>
   );
 }
 
 const styles = {
-  h1: {
+    h2: {
     margin: "1.5rem",
     paddingLeft: "1.5rem",
-    color: "blue",
-    textTransform: "uppercase",
-  },
-  h2: {
-    margin: "1.5rem",
-    paddingLeft: "1.5rem",
-    color: "#FFFEF6",
+    color: "#212121",
     textTransform: "uppercase",
   },
 
-  container: {
+    container: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "70vh",
-  },
-  fieldset:{
-    display: "inline-block",
-    width: "30%",
-    height: "auto",  
-    padding: "2rem",
-    borderRadius:"24px",
-    border:"1px solid #B22222",
+    minHeight: "75vh",
+    padding: "1rem",
+    backgroundColor: "#f5f5f5"
   },
   form: {
+    width: "100%",
+    maxWidth: "500px",
+    backgroundColor: "#f8f8ff",
+    padding: "2.5rem",
+    borderRadius: "5px",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     flexDirection: "column",
-    gap: "1rem",
+  },
+
+  label: {
+    fontSize: "1rem",
+    marginBottom: "0.5rem",
+    color: "#333",
   },
   input: {
-    border: "none",
-    borderBottom: "1px solid red;",
-    outline: "none",
-  },
-  label: {
-    fontSize: "1.2rem",
-  },
-  submit:
-  {
-    color: "#fffef6",
-    backgroundColor: "#B22222",
-    padding: "1rem 4rem",
-    outline: "none",
-    border: "none",
-    borderRadius: "2px",
+    padding: "1rem",
+    borderRadius: "5px",
+    boder: "1px solid #212121",
+    marginBottom: "1rem",
     fontSize: "1rem",
   },
-  registro:
-  {
-    color: "red",
+  button: {
+    backgroundColor: "#B22",
+    color: "#f8f8ff",
+    padding: "1rem",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "1rem",
+    marginTop: "0.5rem",
+    width:"6rem",
+  },
+  login: {
+    textAlign: "center",
     marginTop:"1rem",
-    gap:"1.2rem",
-    padding: "1rem 4rem",
-  }
+    textDecoration:"none",
+    color:"#B22",
+    fontSize:"1rem",
+  },
+  
 };
