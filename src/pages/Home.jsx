@@ -24,9 +24,11 @@ export default function Home() {
   return (
     <div>
       <Menu />
+      <h2 style={styles.h2}>SERVIÇOS</h2>
       <div style={styles.grid}>
         {services.map((service) => (
-          <ServiceCard key={service.id} service={service} />
+          <ServiceCard key={service.id} service={service} 
+          />
         ))}
       </div>
     </div>
@@ -39,7 +41,22 @@ const styles = {
     gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
     gap: "1.5rem",
     padding: "1.5rem",
-    backgroundColor:"#666",
+    backgroundColor: "#f8f8ff",
+  },
+
+  h2: {
+    margin: "1.5rem",
+    paddingLeft: "1.5rem",
+    color: "#212121",
+    textTransform: "uppercase",
+  },
+
+  card: {
+    border: "1px solid #B22",
+    borderRadius: "10px",
+    padding: "1rem",
+    backgroundColor: "#f8f8ff",
+    boxShadow: "0 2px 6px rgba(0.0.0.0,1)",
   },
 };
 

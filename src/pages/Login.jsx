@@ -72,9 +72,9 @@ const styles = {
   button: {
     backgroundColor: "#B22",
     color: "#f8f8ff",
-    padding: "1rem",
+    padding: "0.5rem",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "0.5rem",
     cursor: "pointer",
     fontSize: "1rem",
     marginTop: "0.5rem",
@@ -87,4 +87,5 @@ const styles = {
     color:"#B22",
     fontSize:"1rem",
   },
+  
 };

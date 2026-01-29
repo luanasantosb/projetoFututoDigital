@@ -19,6 +19,9 @@ export default function Menu() {
         <li style={styles.li}>
           <Link style={styles.link} to="/registro">Registro</Link>
         </li>
+        <li style={styles.li}>
+          <Link style={styles.link} to="/checkout">Checkout</Link>
+        </li>
       </ul>
     </nav>
   );
@@ -29,7 +32,7 @@ const styles = {
      display: "flex",
     justifyContent:"center",
     padding: "1rem",
-    backgroundColor: "#212121",
+    backgroundColor: "#B22222",
   },
   ul: {
     listStyle: "none",
@@ -40,7 +43,7 @@ const styles = {
   },
   li: {},
   link: {
-    color: "white",
+    color: "#f8f8ff",
     textDecoration: "none",
     fontWeight: "bold",
   },

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function Details() {
@@ -24,21 +24,29 @@ export default function Details() {
   if (!service) return <p>Serviço não encontrado 😢</p>;
 
   return (
-    <div>
+    <div style={styles.container}>
       <h1>{service.title}</h1>
       <img src={service.image} width={200} />
       <p>{service.description}</p>
-      <strong>Preço: R$ {service.price}</strong>
+      <strong style={styles.price}>Preço: R$ {service.price}</strong>
+
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <button style={styles.button}>⬅ Voltar</button>
+      </Link>
+
     </div>
   );
 }
 
-
 const styles = {
   container: {
-    padding: "2rem",
-    maxWidth: "800px",
-    margin: "0 auto",
+    padding: "1rem",
+    gap: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    margin: "1rem 2rem 0.5rem 2rem",
+    color:"f5f5f5",
   },
   image: {
     width: "100%",
@@ -49,5 +57,25 @@ const styles = {
   description: {
     margin: "1rem 0",
     lineHeight: 1.5,
+    color: "#212121",
+  },
+  button: {
+    textDecoration: "none",
+    backgroundColor: "#B22",
+    color: "#f8f8ff",
+    padding: "0.5rem",
+    border: "none",
+    borderRadius: "0.5rem",
+    cursor: "pointer",
+    fontSize: "1rem",
+    marginTop: "1rem",
+    display: "flex",
+    justifyContent: "center",
+  },
+  price: {
+    display: "block",
+    marginTop: "1rem",
+    fontSize: "1.2rem",
+    color: "#B22",
   },
 };

@@ -5,6 +5,7 @@ import Admin from "./pages/Admin";
 import MeusPedidos from "./pages/MeusPedidos";
 import Registro from "./pages/Registro";
 import ServiceDetails from "./pages/ServiceDetails";
+import Checkout from "./pages/Checkout";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/meus-pedidos" element={<MeusPedidos />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
   );
 }
