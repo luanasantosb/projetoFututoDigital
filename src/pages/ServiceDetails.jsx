@@ -21,9 +21,11 @@ export default function Details() {
 
   if (loading) return <p>Carregando detalhes...</p>;
 
-  if (!service) return <p>Serviço não encontrado 😢</p>;
+  if (!service) return <p>Serviço não encontrado </p>;
+
 
   return (
+    
     <div style={styles.container}>
       <h1>{service.title}</h1>
       <img src={service.image} width={200} />

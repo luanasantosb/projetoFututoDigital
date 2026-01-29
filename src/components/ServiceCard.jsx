@@ -10,7 +10,9 @@ export default function ServiceCard({ service }) {
           <p>R$ {service.price}</p>
         </div>
       </Link>
-      <Link to='./checkout' style={{ textDecoration: "none" }}>
+
+      <Link to="/checkout"
+      state={{ service }} style={{ textDecoration: "none" }}>
       <button style={styles.button}>Comprar</button>
       </Link>
     </div>

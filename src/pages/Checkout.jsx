@@ -1,33 +1,114 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Menu from "../components/Menu";
-function Checkout() {
+
+export default function Checkout() {
+    const location = useLocation();
+    const service = location.state?.service;
+
+    if (!service) {
+        return <p style={{ margin: "2rem" }}>Serviço não encontrado</p>;
+    }
+
     return (
         <div>
             <Menu />
-            <h2 style={styles.h2}>Página de Checkout - Em construção!</h2>
+
+            <h2 style={styles.h2}>Página de Checkout</h2>
+
             <div style={styles.container}>
-                <h3>{service.title}</h3>
-                <img src={service.image} width={200} />
+                <h3 style={styles.h3}>{service.title}</h3>
+
+                <img style={styles.image}
+                    src={service.image}
+                    alt={service.title}
+                />
+
                 <p>{service.description}</p>
-                <strong style={styles.price}>Preço: R$ {service.price}</strong>
+
+                <strong style={styles.price}>
+                    Preço: R$ {service.price}
+                </strong>
+                <div style={styles.options}>
+                <label style={styles.label}>Escolha o dia</label>
+                <input type="date" style={styles.input} />
+
+                <label style={styles.label}>Escolha o horário</label>
+                <input type="time" style={styles.input} />
+
+                <button style={styles.button}>Finalizar Compra</button>
+                </div>
             </div>
-            <Link to="/" style={{ textDecoration: 'none' }}>
-                <button style={{ ...styles.button, marginLeft: "1.5rem" }}>⬅ Voltar</button>
+
+            <Link to="/" style={{ textDecoration: "none" }}>
+                <button style={{ ...styles.button, marginLeft: "1.5rem" }}>
+                    ⬅ Voltar
+                </button>
             </Link>
         </div>
     );
 }
-export default Checkout;
 
 const styles = {
     h2: {
         margin: "1.5rem",
         paddingLeft: "1.5rem",
-        color: "#212121",
+        color: "#B22",
         textTransform: "uppercase",
     },
+    container: {
+    padding: "1rem",
+    gap: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    margin: "1rem 2rem 0.5rem 2rem",
+    color:"f5f5f5",
+  },
+       h3: {
+        margin: "1.2rem",
+        paddingLeft: "1.2rem",
+        color: "#212121",
+        textTransform: "uppercase",
+        fontSize: "1.5rem",
+    },
+     image: {
+    width: "100%",
+    maxHeight: "200px",
+    objectFit: "contain",
+    marginBottom: "1rem",
+    },
+    description: {
+    margin: "1rem 0",
+    lineHeight: 1.5,
+    color: "#212121",
+  },
+    price: {
+    display: "block",
+    marginTop: "1rem",
+    fontSize: "1.2rem",
+    color: "#B22",
+  },
+  options: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "1rem",
+    alignItems: "center",
+    marginTop: "1rem",
+  },
+ label: {
+    fontSize: "1rem",
+    marginBottom: "0.5rem",
+    color: "#333",
+  },
+     input: {
+    padding: "0.5rem",
+    borderRadius: "5px",
+    border: "1px solid #212121",
+    marginBottom: "1rem",
+    fontSize: "1rem",
+    color:"#333",
+  },
     button: {
-        textDecoration: "none",
         backgroundColor: "#B22",
         color: "#f8f8ff",
         padding: "0.5rem",
@@ -38,5 +119,6 @@ const styles = {
         marginTop: "1rem",
         display: "flex",
         justifyContent: "center",
+        marginBottom:"1rem",
     },
-}
+};
