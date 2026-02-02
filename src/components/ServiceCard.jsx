@@ -13,7 +13,7 @@ export default function ServiceCard({ service }) {
 
       <Link to="/checkout"
       state={{ service }} style={{ textDecoration: "none" }}>
-      <button style={styles.button}>Comprar</button>
+      <button style={styles.button}>Agendar</button>
       </Link>
     </div>
   );
