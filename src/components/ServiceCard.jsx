@@ -4,17 +4,20 @@ export default function ServiceCard({ service }) {
    if (!service || !service.id) return null;
   return (
     <div style={styles.card}>
-      <Link to={`/service/${service.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+      
         <div>
           <h3>{service.title}</h3>
           <p>R$ {service.price}</p>
         </div>
-      </Link>
+  
+  <div style={styles.buttonsContainer}>
+  <Link to={`/service/${service.id}`} style={{ textDecoration: "none" }}><button style={styles.button}>Ver +</button></Link>
 
       <Link to="/checkout"
       state={{ service }} style={{ textDecoration: "none" }}>
-      <button style={styles.button}>Agendar</button>
+      <button style={styles.button}>Contratar</button>
       </Link>
+      </div>
     </div>
   );
 }
@@ -31,6 +34,11 @@ const styles = {
     width: "100%",
     height: "150px",
     objectFit: "contain",
+  },
+  buttonsContainer: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    marginTop: "1rem",
   },
     button: {
     backgroundColor: "#B22",
