@@ -68,7 +68,7 @@ const styles = {
     color:"#333",
   },
   button: {
-    backgroundColor: "#B22",
+    backgroundColor: "#007fff",
     color: "#f8f8ff",
     padding: "0.5rem",
     border: "none",
@@ -82,7 +82,7 @@ const styles = {
     textAlign: "center",
     marginTop:"1rem",
     textDecoration:"none",
-    color:"#B22",
+    color:"#007fff",
     fontSize:"1rem",
   },
   

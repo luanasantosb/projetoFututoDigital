@@ -52,7 +52,7 @@ const styles = {
   },
 
   card: {
-    border: "1px solid #B22",
+    border: "1px solid #007fff",
     borderRadius: "10px",
     padding: "1rem",
     backgroundColor: "#f8f8ff",

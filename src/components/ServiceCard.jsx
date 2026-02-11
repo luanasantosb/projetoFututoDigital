@@ -24,7 +24,7 @@ export default function ServiceCard({ service }) {
 
 const styles = {
   card: {
-    border: "1px solid #B22",
+    border: "1px solid #007fff",
     borderRadius: "8px",
     padding: "1rem",
     cursor: "pointer",
@@ -41,7 +41,7 @@ const styles = {
     marginTop: "1rem",
   },
     button: {
-    backgroundColor: "#B22",
+    backgroundColor: "#007fff",
     color: "#f8f8ff",
     padding: "0.5rem",
     border: "none",

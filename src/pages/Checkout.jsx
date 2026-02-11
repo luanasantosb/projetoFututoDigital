@@ -9,7 +9,7 @@ export default function Checkout() {
 
     const [erro, setErro] = useState("");
 
-        const handleAgendar = () => {
+    const handleAgendar = () => {
         const usuario = JSON.parse(localStorage.getItem("usuario"));
 
         if (!usuario) {
@@ -20,13 +20,19 @@ export default function Checkout() {
         setErro("");
 
         console.log("Agendamento realizado!");
-        // aqui depois você pode salvar no backend
+
     };
 
 
     return (
         <div>
             <Menu />
+
+            <Link to="/" style={{ textDecoration: "none" }}>
+                <button style={{ ...styles.button, marginLeft: "1.5rem" }}>
+                    ⬅ Voltar
+                </button>
+            </Link>
 
             <h2 style={styles.h2}>Página de Checkout</h2>
 
@@ -55,24 +61,30 @@ export default function Checkout() {
                     </button>
                     {erro && <p style={styles.erroAgendamento}>{erro}</p>}
 
-
                 </div>
             </div>
-
-            <Link to="/" style={{ textDecoration: "none" }}>
-                <button style={{ ...styles.button, marginLeft: "1.5rem" }}>
-                    ⬅ Voltar
-                </button>
-            </Link>
         </div>
     );
 }
 
 const styles = {
+      button: {
+        display: "flex",
+        backgroundColor: "#007fff",
+        color: "#f8f8ff",
+        padding: "0.5rem",
+        border: "none",
+        borderRadius: "0.5rem",
+        cursor: "pointer",
+        fontSize: "1rem",
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "1rem",
+    },
     h2: {
         margin: "1.5rem",
         paddingLeft: "1.5rem",
-        color: "#B22",
+        color: "#007fff",
         textTransform: "uppercase",
     },
     container: {
@@ -106,46 +118,32 @@ const styles = {
         display: "block",
         marginTop: "1rem",
         fontSize: "1.2rem",
-        color: "#B22",
+        color: "#B22222222",
     },
     options: {
         display: "flex",
         flexDirection: "row",
+        alignItems: "flex-end",
         gap: "1rem",
-        alignItems: "center",
-        marginTop: "1rem",
+        marginTop: "2rem",
     },
     label: {
         fontSize: "1rem",
-        marginBottom: "0.5rem",
-        color: "#333",
+        color: "#212121",
     },
     input: {
+        outline: "none",
+        border:"none",
+        borderBottom: "1px solid #007fff",
         padding: "0.5rem",
-        borderRadius: "5px",
-        border: "1px solid #212121",
-        marginBottom: "1rem",
         fontSize: "1rem",
-        color: "#333",
-    },
-    button: {
-        backgroundColor: "#B22",
-        color: "#f8f8ff",
-        padding: "0.5rem",
-        border: "none",
-        borderRadius: "0.5rem",
-        cursor: "pointer",
-        fontSize: "1rem",
-        marginTop: "1rem",
-        display: "flex",
-        justifyContent: "center",
-        marginBottom: "1rem",
+        color: "#212121",
     },
     erroAgendamento: {
         margin: "0.5rem 0 0 0",
         padding: "0.75rem 1rem",
         backgroundColor: "#ffe5e5",
-        color: "#b00020",
+        color: "#007fff",
         borderRadius: "8px",
         fontSize: "0.9rem",
     }
