@@ -1,12 +1,3 @@
-const express = require('express');
-const cors = require('cors');
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-// Serviços iniciais de teste com imagens que carregam
 let servicos = [
   {
     id: 1,
@@ -31,38 +22,31 @@ let servicos = [
   }
 ];
 
-// Rota inicial
-app.get('/', (req, res) => {
-  res.json({ mensagem: "API funcionando 🚀" });
-});
+export default function handler(req, res) {
+  const { method } = req;
 
-// Listar todos os serviços
-app.get('/servicos', (req, res) => {
-  res.json(servicos);
-});
+  if (method === 'GET') {
+    if (req.query.id) {
+      const servico = servicos.find(s => s.id === parseInt(req.query.id));
+      if (!servico) return res.status(404).json({ erro: "Serviço não encontrado" });
+      return res.status(200).json(servico);
+    }
+    return res.status(200).json(servicos);
+  }
 
-// Buscar serviço por ID
-app.get('/servicos/:id', (req, res) => {
-  const { id } = req.params;
-  const servico = servicos.find(s => s.id === parseInt(id));
-  if (!servico) return res.status(404).json({ erro: "Serviço não encontrado" });
-  res.json(servico);
-});
+  if (method === 'POST') {
+    const { nome, preco, detalhes, imagem } = req.body;
+    const novoServico = {
+      id: servicos.length + 1,
+      nome,
+      preco,
+      detalhes,
+      imagem
+    };
+    servicos.push(novoServico);
+    return res.status(201).json(novoServico);
+  }
 
-// Criar novo serviço
-app.post('/servicos', (req, res) => {
-  const novoServico = {
-    id: servicos.length + 1,
-    nome: req.body.nome,
-    preco: req.body.preco,
-    detalhes: req.body.detalhes,
-    imagem: req.body.imagem
-  };
-
-  servicos.push(novoServico);
-  res.status(201).json(novoServico);
-});
-
-app.listen(3000, () => {
-  console.log('Servidor rodando em http://localhost:3000');
-});
+  res.setHeader('Allow', ['GET', 'POST']);
+  res.status(405).end(`Método ${method} não permitido`);
+}
