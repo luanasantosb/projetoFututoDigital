@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import MeusPedidos from "./pages/MeusPedidos";
 import Registro from "./pages/Registro";
-import ServiceDetails from "./pages/ServiceDetails";
+import Details from "./pages/Details";
 import Checkout from "./pages/Checkout";
 
 
@@ -12,7 +12,7 @@ function App() {
   return (
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/service/:id" element={<ServiceDetails />} />
+        <Route path="/detalhes/:id" element={<Details />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/meus-pedidos" element={<MeusPedidos />} />

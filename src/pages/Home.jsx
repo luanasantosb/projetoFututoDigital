@@ -7,13 +7,13 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => {
+    fetch("http://localhost:3000/servicos")
+      .then(res => res.json())
+      .then(data => {
         setServices(data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         setLoading(false);
       });
@@ -26,9 +26,8 @@ export default function Home() {
       <Menu />
       <h2 style={styles.h2}>SERVIÇOS</h2>
       <div style={styles.grid}>
-        {services.map((service) => (
-          <ServiceCard key={service.id} service={service} 
-          />
+        {services.map(servico => (
+          <ServiceCard key={servico.id} service={servico} />
         ))}
       </div>
     </div>

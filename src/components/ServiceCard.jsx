@@ -1,20 +1,16 @@
 import { Link } from "react-router-dom";
 
 export default function ServiceCard({ service }) {
-   if (!service || !service.id) return null;
   return (
     <div style={styles.card}>
+      <h3>{service.nome}</h3>
+      R$ {service.preco}
       
-        <div>
-          <h3>{service.title}</h3>
-          <p>R$ {service.price}</p>
-        </div>
-  
-  <div style={styles.buttonsContainer}>
-  <Link to={`/service/${service.id}`} style={{ textDecoration: "none" }}><button style={styles.button}>Ver +</button></Link>
-
-      <Link to="/checkout"
-      state={{ service }} style={{ textDecoration: "none" }}>
+      <div style={styles.buttonsContainer}>
+      <Link to={`/detalhes/${service.id}`}>
+        <button style={styles.button}>Ver detalhes</button>
+      </Link>
+      <Link to={`/Checkout/${service.id}`}>
       <button style={styles.button}>Contratar</button>
       </Link>
       </div>
@@ -37,8 +33,9 @@ const styles = {
   },
   buttonsContainer: {
     display: "flex",
-    justifyContent: "space-evenly",
-    marginTop: "1rem",
+    flexDirection:"row",
+    marginTop: "0.5rem",
+    gap:"0.5rem"
   },
     button: {
     backgroundColor: "#007fff",
@@ -47,7 +44,7 @@ const styles = {
     border: "none",
     borderRadius: "0.5rem",
     cursor: "pointer",
-    fontSize: "1rem",
+    fontSize: "0.8rem",
     marginTop: "0.5rem",
     width: "6rem",
   },
