@@ -90,7 +90,6 @@ const styles = {
   },
 
   card: {
-    border: "1px solid #007fff",
     borderRadius: "10px",
     padding: "1rem",
     backgroundColor: "#f8f8ff",
@@ -98,6 +97,7 @@ const styles = {
   },
 
   buttonsContainer: {
+    justifyContent:"space-evenly",
     margin:"0.5rem",
     gap:"0.5rem",
     display:"flex",
@@ -105,12 +105,16 @@ const styles = {
   },
 
   button: {
-    border: "1px solid #007fff",
     borderRadius: "4px",
     backgroundColor: "#007fff",
     color: "#f8f8ff",
-    padding:"0.5rem"
-  }
+    padding: "0.5rem",
+    margin: "0.25rem 0",
+    textAlign: "center",
+    cursor: "pointer",
+    textDecoration: "none", 
+  },
+
 
 };
 
