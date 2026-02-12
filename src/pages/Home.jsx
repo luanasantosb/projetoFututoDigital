@@ -7,26 +7,38 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/servicos")
-      .then(res => res.json())
-      .then(data => {
-        setServices(data);
-        setLoading(false);
-      })
-      .catch(err => {
+    const fetchServices = async () => {
+      try {
+        const res = await fetch("https://api.jsonbin.io/v3/b/698e0f3e43b1c97be97a0aca", {
+          headers: {
+            "X-Master-Key": "$2a$10$IuPxYHIyj8ksrR2epKQeJOSRYbN2.hp4HKH1n37SXocOfBYlpr2Ty" 
+          }
+        });
+
+        if (!res.ok) throw new Error("Erro ao carregar serviços");
+        const data = await res.json();
+
+        setServices(data.record);
+      } catch (err) {
         console.error(err);
+        setServices([]);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchServices();
   }, []);
 
   if (loading) return <p>Carregando serviços...</p>;
+  if (!services.length) return <p>Nenhum serviço encontrado.</p>;
 
   return (
     <div>
       <Menu />
       <h2 style={styles.h2}>SERVIÇOS</h2>
       <div style={styles.grid}>
-        {services.map(servico => (
+        {services.map((servico) => (
           <ServiceCard key={servico.id} service={servico} />
         ))}
       </div>
