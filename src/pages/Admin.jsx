@@ -128,7 +128,7 @@ const styles = {
     overflow: "hidden",
   },
   tabelaCabecalho: {
-    backgroundColor: "#007fff",
+    backgroundColor: "#357ec7",
     color: "#fff",
   },
   tabelaLinha: {

@@ -100,7 +100,7 @@ const styles = {
     color: "#333",
   },
   button: {
-    backgroundColor: "#007fff",
+    backgroundColor: "#357ec7",
     color: "#f8f8ff",
     padding: "0.5rem",
     border: "none",
@@ -114,7 +114,7 @@ const styles = {
     textAlign: "center",
     marginTop: "1rem",
     textDecoration: "none",
-    color: "#007fff",
+    color: "#357ec7",
     fontSize: "1rem",
   },
 

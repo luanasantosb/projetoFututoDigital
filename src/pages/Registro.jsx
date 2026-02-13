@@ -13,7 +13,7 @@ export default function Registro() {
           <input style={styles.input} id="nome" type="text" value="seu nome" />
 
           <label htmlFor="email" style={styles.label}>Digite seu e-mail</label>
-          <input style={styles.input} id="email" type="email" placeholder="seu@email.com" />
+          <input style={styles.input} id="email" type="email" placeholder="seuemail@email.com" />
 
           <label htmlFor="senha" style={styles.label}>
             Digite sua senha:</label>
@@ -30,7 +30,7 @@ export default function Registro() {
           <Link
             to="/login"
             style={{ ...styles.login, textDecoration: "none" }}>
-            Não possui uma conta? Cadastre-se aqui
+            Já tem uma conta? Faça seu login!
           </Link>
 
         </form>
@@ -45,39 +45,40 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     minHeight: "75vh",
-    padding: "1rem",
-    backgroundColor: "#f5f5f5"
   },
   h2: {
-    margin: "1.5rem",
+    textAlign:"center",
+    margin: "0.5rem",
     paddingLeft: "1.5rem",
     color: "#212121",
     textTransform: "uppercase",
   },
   form: {
+    marginTop:"0",
+    border:"1px solid red",
     width: "100%",
     maxWidth: "500px",
-    backgroundColor: "#f8f8ff",
-    padding: "2.5rem",
+    padding: "1rem",
     borderRadius: "0.5rem",
     display: "flex",
     flexDirection: "column",
   },
   label: {
     fontSize: "1rem",
-    color: "#333",
+    color: "#212121",
     marginTop: "1rem",
   },
    input: {
+    backgroundColor:"#e8e8e8",
+    outline:"none",
+    border:"none",
     padding: "0.5rem",
-    borderRadius: "5px",
-    border: "1px solid #212121",
+    borderBottom: "1px solid #357ec7",
     marginBottom: "1rem",
     fontSize: "1rem",
-    color:"#333",
   },
   button: {
-    backgroundColor: "#007fff",
+    backgroundColor: "#357ec7",
     color: "#f8f8ff",
     padding: "0.5rem",
     border: "none",
@@ -91,7 +92,7 @@ const styles = {
     textAlign: "center",
     marginTop:"1rem",
     textDecoration:"none",
-    color:"#007fff",
+    color:"#357ec7",
     fontSize:"1rem",
   },
 

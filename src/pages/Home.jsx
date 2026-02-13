@@ -81,7 +81,7 @@ const styles = {
   h1: {
     margin: "1.5rem",
     paddingLeft: "2rem",
-    color: "#007fff",
+    color: "#357ec7",
   },
 
   h2: {
@@ -109,9 +109,9 @@ const styles = {
 
   linkStyle: {
     display: "inline-block",
-    border: "1px solid #007fff",
+    border: "1px solid #357ec7",
     borderRadius: "4px",
-    backgroundColor: "#007fff",
+    backgroundColor: "#357ec7",
     color: "#f8f8ff",
     padding: "0.5rem 1rem",
     margin: "0.25rem",

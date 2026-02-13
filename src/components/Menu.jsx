@@ -32,7 +32,7 @@ const styles = {
      display: "flex",
     justifyContent:"center",
     padding: "1rem",
-    backgroundColor: "#007fff",
+    backgroundColor: "#357ec7",
   },
   ul: {
     listStyle: "none",

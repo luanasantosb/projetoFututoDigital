@@ -1,158 +1,125 @@
-import { useEffect, useState } from "react";
-import Menu from "../components/Menu";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function Admin() {
-  const [pedidos, setPedidos] = useState([]);
+function MeusPedidos() {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("http://localhost:3000/pedidos")
-      .then((res) => res.json())
-      .then((data) => setPedidos(data));
-  }, []);
+  const orders = JSON.parse(localStorage.getItem("orders") || "[]");
 
-  const atualizarStatus = async (id, novoStatus) => {
-    try {
-      await fetch(`http://localhost:3000/pedidos/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: novoStatus }),
-      });
-
-      setPedidos((prevPedidos) =>
-        prevPedidos.map((pedido) =>
-          pedido.id === id ? { ...pedido, status: novoStatus } : pedido
-        )
-      );
-    } catch (error) {
-      console.error("Erro ao atualizar pedido:", error);
-    }
-  };
-
-  const getStatusStyle = (status) => {
-    switch (status) {
-      case "Aguardando aprovação":
-        return styles.statusPendente;
-      case "Aprovado":
-        return styles.statusAprovado;
-      case "Recusado":
-        return styles.statusRecusado;
-      default:
-        return {};
-    }
-  };
+  function handleLogout() {
+    localStorage.removeItem("user");
+    navigate("/login");
+  }
 
   return (
-    <div>
-      <Menu />
-      <div style={styles.container}>
-        <h2 style={styles.h2}>Pedidos</h2>
+    <div style={styles.container}>
+      <div style={styles.buttonsContainer}>
+        <Link to="/checkout" style={styles.linkStyle}>
+          Ir para Checkout
+        </Link>
 
-        <table style={styles.tabela}>
-          <thead style={styles.tabelaCabecalho}>
+        <button onClick={handleLogout} style={styles.button}>
+          Logout
+        </button>
+      </div>
+
+      <h1 style={styles.h1}>Meus Pedidos</h1>
+
+      {orders.length === 0 ? (
+        <p>Você ainda não possui pedidos.</p>
+      ) : (
+        <table style={styles.table}>
+          <thead>
             <tr>
-              <th>Número</th>
-              <th>Data</th>
-              <th>Serviço</th>
-              <th>Status</th>
-              <th>Ações</th>
+              <th style={styles.th}>Serviço</th>
+              <th style={styles.th}>Pedido</th>
+              <th style={styles.th}>Data</th>
+              <th style={styles.th}>Horário</th>
+              <th style={styles.th}>Status</th>
+              <th style={styles.th}>Preço</th>
             </tr>
           </thead>
           <tbody>
-            {pedidos.map((pedido) => (
-              <tr key={pedido.id} style={styles.tabelaLinha}>
-                <td>{pedido.id}</td>
-                <td>{pedido.data}</td>
-                <td>{pedido.servico}</td>
-                <td>
-                  <span style={{ ...styles.statusBase, ...getStatusStyle(pedido.status) }}>
-                    {pedido.status}
-                  </span>
-                </td>
-                <td>
-                  {pedido.status?.toLowerCase().trim() === "aguardando aprovação" && (
-
-                    <>
-                      <button
-                        style={styles.botaoAprovar}
-                        onClick={() => atualizarStatus(pedido.id, "Aprovado")}
-                      >
-                        Aprovar
-                      </button>
-                      <button
-                        style={styles.botaoRecusar}
-                        onClick={() => atualizarStatus(pedido.id, "Recusado")}
-                      >
-                        Recusar
-                      </button>
-                    </>
-                  )}
-                </td>
+            {orders.map((order) => (
+              <tr key={order.id}>
+                <td style={styles.td}>{order.servico}</td>
+                <td style={styles.td}>#{order.id}</td>
+                <td style={styles.td}>{order.data}</td>
+                <td style={styles.td}>{order.horario}</td>
+                <td style={styles.td}>{order.status}</td>
+                <td style={styles.td}>R$ {order.preco}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      )}
     </div>
   );
 }
 
+export default MeusPedidos;
+
 const styles = {
   container: {
     padding: "2rem",
-    backgroundColor: "#f5f5f5",
-    minHeight: "75vh",
   },
-  h2: {
-    marginBottom: "1rem",
-  },
-  tabela: {
+
+  table: {
     width: "100%",
     borderCollapse: "collapse",
-    backgroundColor: "#fff",
+    marginTop: "1rem",
   },
-  tabelaCabecalho: {
-    backgroundColor: "#007fff",
-    color: "#fff",
+
+  th: {
+    borderBottom: "2px solid #ccc",
+    textAlign: "left",
+    padding: "8px",
   },
-  tabelaLinha: {
-    textAlign: "center",
+
+  td: {
     borderBottom: "1px solid #eee",
+    padding: "8px",
   },
-  statusBase: {
-    padding: "6px 10px",
-    borderRadius: "6px",
-    fontSize: "0.8rem",
-    fontWeight: "bold",
+
+  buttonsContainer: {
+    width: "100%",
+    justifyContent: "flex-start",
+    margin: "0.8rem 0",
+    gap: "0.8rem",
+    display: "flex",
+    flexDirection: "row",
   },
-  statusPendente: {
-    backgroundColor: "#fff3cd",
-    color: "#856404",
+
+  linkStyle: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "9rem",
+    height: "2.2rem",
+    border: "1px solid #357ec7",
+    borderRadius: "5px",
+    backgroundColor: "#357ec7",
+    color: "#f8f8ff",
+    cursor: "pointer",
+    textDecoration: "none",
   },
-  statusAprovado: {
-    backgroundColor: "#d4edda",
-    color: "#155724",
-  },
-  statusRecusado: {
-    backgroundColor: "#f8d7da",
-    color: "#721c24",
-  },
-  botaoAprovar: {
-    backgroundColor: "#28a745",
-    color: "#fff",
-    border: "none",
-    padding: "6px 10px",
-    marginRight: "5px",
-    borderRadius: "4px",
+
+  button: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "5rem",
+    height: "2.2rem",
+    border: "1px solid #B22222",
+    borderRadius: "5px",
+    backgroundColor: "#B22222",
+    color: "#f8f8ff",
     cursor: "pointer",
   },
-  botaoRecusar: {
-    backgroundColor: "#dc3545",
-    color: "#fff",
-    border: "none",
-    padding: "6px 10px",
-    borderRadius: "4px",
-    cursor: "pointer",
+
+  h1: {
+    margin: "1.5rem 0",
+    color: "#212121",
+    textAlign: "center",
   },
 };
