@@ -1,92 +1,99 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import '../styles.css'
 
 export default function Details() {
   const { id } = useParams();
-  const [servico, setServico] = useState(null);
+
+
+  const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/servicos/${id}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Serviço não encontrado");
-        return res.json();
-      })
-      .then(data => {
-        setServico(data);
-        setLoading(false);
-      })
-      .catch(err => {
+    const fetchService = async () => {
+      try {
+        const res = await fetch(
+          "https://api.jsonbin.io/v3/b/698e0f3e43b1c97be97a0aca",
+          {
+            headers: {
+              "X-Master-Key": "$2a$10$IuPxYHIyj8ksrR2epKQeJOSRYbN2.hp4HKH1n37SXocOfBYlpr2Ty",
+            },
+          }
+        );
+
+        if (!res.ok) throw new Error("Erro ao carregar serviço");
+
+        const data = await res.json();
+
+        const found = data.record.find((s) => s.id === parseInt(id));
+        setService(found || null);
+      } catch (err) {
         console.error(err);
+        setService(null);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchService();
   }, [id]);
 
-  if (loading) return <p>Carregando detalhes...</p>;
-  if (!servico) return <p>Serviço não encontrado</p>;
+  if (loading) return <p>Carregando serviço...</p>;
+  if (!service) return <p>Serviço não encontrado.</p>;
 
   return (
+
     <div style={styles.container}>
-      <h1>{servico.nome}</h1>
+      <Link to="/" style={styles.linkStyle}>⬅ Voltar</Link>
+      <h2 style={styles.h2}>{service.nome}</h2>
+      {service.imagem && (
+        <img
+          src={service.imagem}
+          alt={service.nome}
+          style={styles.imageStyle}
+        />
+      )}
 
-      {/* Imagem com estilo seguro */}
-      <img
-        src={servico.imagem}
-        alt={servico.nome}
-        style={styles.image}
-      />
-
-      <p style={styles.description}>{servico.detalhes}</p>
-      <strong style={styles.price}>Preço: R$ {servico.preco}</strong>
-
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <button style={styles.button}>⬅ Voltar</button>
-      </Link>
+      <p style={styles.preco}>Preço: R$ {service.preco}</p>
+      <p>{service.detalhes}</p>
     </div>
   );
 }
-
 const styles = {
   container: {
-    padding: "1rem",
-    gap: "1rem",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    margin: "1rem 2rem 0.5rem 2rem",
-    color: "#212121",
+    minHeight: "75vh",
+    padding: "1rem",
   },
-  image: {
-    width: "300px",       // largura fixa
-    maxHeight: "300px",   // altura máxima
-    objectFit: "contain", // mantém proporção sem cortar
-    marginBottom: "1rem",
-    borderRadius: "0.5rem",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.2)"
-  },
-  description: {
-    margin: "1rem 0",
-    lineHeight: 1.5,
-    textAlign: "center",
-    color: "#212121",
-  },
-  button: {
-    textDecoration: "none",
+
+  linkStyle: {
+    alignSelf: "stretch",
+    width: "2.5rem",
+    textAlign: "left",
+    border: "1px solid #007fff",
+    borderRadius: "5px",
     backgroundColor: "#007fff",
     color: "#f8f8ff",
-    padding: "0.5rem 1rem",
-    border: "none",
-    borderRadius: "0.5rem",
+    padding: "0.3rem",
+    margin: "0.25rem",
     cursor: "pointer",
-    fontSize: "1rem",
-    marginTop: "1rem",
-    display: "flex",
-    justifyContent: "center",
+    textDecoration: "none",
   },
-  price: {
-    display: "block",
-    marginTop: "1rem",
-    fontSize: "1.2rem",
-    color: "#007fff",
+  h2: {
+    margin: "0.5rem",
+    textTransform: "uppercase",
+    color: "#212121",
   },
-};
+  imageStyle: {
+    width: "300px",
+    borderRadius: "10px",
+  },
+  preco: {
+    margin: "1rem",
+    fontWeight: "700",
+  }
+}

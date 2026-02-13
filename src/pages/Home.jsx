@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ServiceCard from "../components/ServiceCard";
 import Menu from "../components/Menu";
+import '../styles.css'
 
 export default function Home() {
   const [services, setServices] = useState([]);
@@ -46,42 +47,20 @@ export default function Home() {
             <ServiceCard service={service} />
 
             <div style={styles.buttonsContainer}>
-              <Link
-                to={`/servicos/${service.id}`}
-                style={{
-                  display: "inline-block",
-                  border: "1px solid #007fff",
-                  borderRadius: "4px",
-                  backgroundColor: "#007fff",
-                  color: "#f8f8ff",
-                  padding: "0.5rem 1rem",
-                  margin: "0.25rem",
-                  textAlign: "center",
-                  cursor: "pointer",
-                  textDecoration: "none", 
-                }}
-              >
+
+              <Link to={`/servicos/${service.id}`} style={styles.linkStyle}>
                 Ver detalhes
               </Link>
 
-
               <Link
-                to={`/servicos/${service.id}`}
-                style={{
-                  display: "inline-block",
-                  border: "1px solid #007fff",
-                  borderRadius: "4px",
-                  backgroundColor: "#007fff",
-                  color: "#f8f8ff",
-                  padding: "0.5rem 1rem",
-                  margin: "0.25rem",
-                  textAlign: "center",
-                  cursor: "pointer",
-                  textDecoration: "none", 
-                }}
+                to="/checkout"
+                state={{ service }}
+                style={styles.linkStyle}
               >
                 Contratar
               </Link>
+
+
 
             </div>
           </div>
@@ -97,14 +76,12 @@ const styles = {
     gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
     gap: "1.5rem",
     padding: "1.5rem",
-    backgroundColor: "#f5f5f5",
   },
 
   h1: {
     margin: "1.5rem",
     paddingLeft: "2rem",
     color: "#007fff",
-    backgroundColor: "#f5f5f5",
   },
 
   h2: {
@@ -114,13 +91,11 @@ const styles = {
     alignItems: "center",
     color: "#212121",
     textTransform: "uppercase",
-    backgroundColor: "#f5f5f5",
   },
 
   card: {
     borderRadius: "10px",
     padding: "1rem",
-    backgroundColor: "#f8f8ff",
     boxShadow: "0 2px 6px rgba(0.0.0.0,1)",
   },
 
@@ -130,6 +105,19 @@ const styles = {
     gap: "0.5rem",
     display: "flex",
     flexDirection: "row",
+  },
+
+  linkStyle: {
+    display: "inline-block",
+    border: "1px solid #007fff",
+    borderRadius: "4px",
+    backgroundColor: "#007fff",
+    color: "#f8f8ff",
+    padding: "0.5rem 1rem",
+    margin: "0.25rem",
+    textAlign: "center",
+    cursor: "pointer",
+    textDecoration: "none",
   },
 
 };

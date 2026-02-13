@@ -1,23 +1,56 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 import '../styles.css';
 
-export default function Login() {
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  function handleLogin(e) {
+    e.preventDefault();
+
+    if (email === "teste@email.com" && password === "123456") {
+      const fakeUser = { email };
+      localStorage.setItem("user", JSON.stringify(fakeUser));
+      navigate("/meuspedidos");
+    } else {
+      alert("Credenciais inválidas");
+    }
+  }
   return (
     <div>
       <Menu />
       <div style={styles.container}>
-        <form style={styles.form}>
+        <form style={styles.form} onSubmit={handleLogin}>
           <h2 style={styles.h2}>Entrar na sua conta</h2>
 
           <label htmlFor="email" style={styles.label}>
             Digite seu e-mail</label>
-          <input style={styles.input} id="email" type="email" placeholder="seu@email.com" />
+          <input
+            style={styles.input}
+            id="email"
+            type="email"
+            placeholder="seu@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
 
           <label htmlFor="senha" style={styles.label}>
             Digite sua senha</label>
-          <input style={styles.input} id="senha" type="password" placeholder="*********" /> 
-          <button style={styles.button}>Entrar</button>
+          <input
+            style={styles.input}
+            id="senha"
+            type="password"
+            placeholder="*********"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button type="submit" style={styles.button}>Entrar</button>
 
           <Link
             to="/registro"
@@ -29,6 +62,7 @@ export default function Login() {
     </div>
   );
 }
+export default Login;
 
 const styles = {
   container: {
@@ -37,7 +71,6 @@ const styles = {
     alignItems: "center",
     minHeight: "75vh",
     padding: "1rem",
-    backgroundColor: "#f5f5f5"
   },
   h2: {
     margin: "1.5rem",
@@ -48,7 +81,6 @@ const styles = {
   form: {
     width: "100%",
     maxWidth: "500px",
-    backgroundColor: "#f8f8ff",
     padding: "2.5rem",
     borderRadius: "5px",
     display: "flex",
@@ -65,7 +97,7 @@ const styles = {
     border: "1px solid #212121",
     marginBottom: "1rem",
     fontSize: "1rem",
-    color:"#333",
+    color: "#333",
   },
   button: {
     backgroundColor: "#007fff",
@@ -76,14 +108,14 @@ const styles = {
     cursor: "pointer",
     fontSize: "1rem",
     marginTop: "0.5rem",
-    width:"6rem",
+    width: "6rem",
   },
   registro: {
     textAlign: "center",
-    marginTop:"1rem",
-    textDecoration:"none",
-    color:"#007fff",
-    fontSize:"1rem",
+    marginTop: "1rem",
+    textDecoration: "none",
+    color: "#007fff",
+    fontSize: "1rem",
   },
-  
+
 };
