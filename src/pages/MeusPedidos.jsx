@@ -71,9 +71,10 @@ const styles = {
   },
 
   th: {
-    borderBottom: "2px solid #ccc",
+    backgroundColor:"#357ec7",
+    borderBottom: "2px solid #357ec7",
     textAlign: "left",
-    padding: "8px",
+    padding: "4px",
   },
 
   td: {
@@ -89,7 +90,6 @@ const styles = {
     display: "flex",
     flexDirection: "row",
   },
-
   linkStyle: {
     display: "flex",
     alignItems: "center",

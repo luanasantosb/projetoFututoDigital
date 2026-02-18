@@ -15,7 +15,7 @@ function Login() {
     if (email === "teste@email.com" && password === "123456") {
       const fakeUser = { email };
       localStorage.setItem("user", JSON.stringify(fakeUser));
-      navigate("/meuspedidos");
+      navigate("/");
     } else {
       alert("Credenciais inválidas");
     }

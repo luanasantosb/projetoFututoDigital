@@ -36,14 +36,16 @@ export default function Checkout() {
     const pedidosSalvos = JSON.parse(localStorage.getItem("orders") || "[]");
 
  
-    const novoPedido = {
-      id: Date.now(),
-      servico: service.nome,
-      preco: service.preco,
-      data: date,
-      horario: time,
-      status: "Agendado"
-    };
+   const novoPedido = {
+  id: Date.now(),
+  servico: service.nome,
+  preco: service.preco,
+  data: date,
+  horario: time,
+  status: "Pendente",
+  email: JSON.parse(user).email
+};
+
 
   
     const pedidosAtualizados = [...pedidosSalvos, novoPedido];

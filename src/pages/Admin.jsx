@@ -1,43 +1,19 @@
 import { useEffect, useState } from "react";
 import Menu from "../components/Menu";
+import '../styles.css';
 
 export default function Admin() {
   const [pedidos, setPedidos] = useState([]);
-  const [busca, setBusca] = useState("");
 
   useEffect(() => {
-    // Simulação de API
-    const pedidosMock = [
-      {
-        id: 12345,
-        data: "01/01/2024",
-        servico: "Manutenção de Computador",
-        status: "Aguardando aprovação",
-      },
-      {
-        id: 12346,
-        data: "03/01/2024",
-        servico: "Formatação",
-        status: "Aprovado",
-      },
-      {
-        id: 12347,
-        data: "05/01/2024",
-        servico: "Troca de HD",
-        status: "Finalizado",
-      },
-    ];
-
-    setPedidos(pedidosMock);
+    const pedidosSalvos = JSON.parse(localStorage.getItem("orders") || "[]");
+    setPedidos(pedidosSalvos);
   }, []);
 
-  const pedidosFiltrados = pedidos.filter((pedido) =>
-    pedido.servico.toLowerCase().includes(busca.toLowerCase())
-  );
 
   const getStatusStyle = (status) => {
     switch (status) {
-      case "Aguardando aprovação":
+      case "Pendente":
         return styles.statusPendente;
       case "Aprovado":
         return styles.statusAprovado;
@@ -47,6 +23,27 @@ export default function Admin() {
         return {};
     }
   };
+  function aprovarPedido(id) {
+    const pedidosAtualizados = pedidos.map((pedido) =>
+      pedido.id === id
+        ? { ...pedido, status: "Aprovado" }
+        : pedido
+    );
+
+    setPedidos(pedidosAtualizados);
+    localStorage.setItem("orders", JSON.stringify(pedidosAtualizados));
+  }
+
+  function recusarPedido(id) {
+    const pedidosAtualizados = pedidos.map((pedido) =>
+      pedido.id === id
+        ? { ...pedido, status: "Recusado" }
+        : pedido
+    );
+
+    setPedidos(pedidosAtualizados);
+    localStorage.setItem("orders", JSON.stringify(pedidosAtualizados));
+  }
 
   return (
     <div>
@@ -57,14 +54,6 @@ export default function Admin() {
           Aqui você pode visualizar todos os pedidos cadastrados.
         </p>
 
-        <input
-          type="text"
-          placeholder="Buscar por serviço..."
-          value={busca}
-          onChange={(e) => setBusca(e.target.value)}
-          style={styles.input}
-        />
-
         <table style={styles.tabela}>
           <thead style={styles.tabelaCabecalho}>
             <tr>
@@ -72,23 +61,58 @@ export default function Admin() {
               <th>Data</th>
               <th>Serviço</th>
               <th>Status</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            {pedidosFiltrados.map((pedido) => (
-              <tr key={pedido.id} style={styles.tabelaLinha}>
-                <td>{pedido.id}</td>
-                <td>{pedido.data}</td>
-                <td>{pedido.servico}</td>
-                <td>
-                  <span style={{ ...styles.statusBase, ...getStatusStyle(pedido.status) }}>
-                    {pedido.status}
-                  </span>
+            {pedidos.length === 0 ? (
+              <tr>
+                <td colSpan="5" style={{ textAlign: "center", padding: "10px" }}>
+                  Nenhum pedido encontrado.
                 </td>
               </tr>
-            ))}
+            ) : (
+              pedidos.map((pedido) => (
+                <tr key={pedido.id} style={styles.tabelaLinha}>
+                  <td>{pedido.id}</td>
+                  <td>{pedido.data}</td>
+                  <td>{pedido.servico}</td>
+                  <td>
+                    <span
+                      style={{
+                        ...styles.statusBase,
+                        ...getStatusStyle(pedido.status),
+                      }}
+                    >
+                      {pedido.status}
+                    </span>
+                  </td>
+                  <td>
+                    {pedido.status === "Pendente" && (
+                      <div style={styles.containerButtons}>
+                        <button
+                          onClick={() => aprovarPedido(pedido.id)}
+                          style={styles.botaoAprovar}
+                        >
+                          Aprovar
+                        </button>
+
+                        <button
+                          onClick={() => recusarPedido(pedido.id)}
+                          style={styles.botaoRecusar}
+                        >
+                          Recusar
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
+
         </table>
+
       </div>
     </div>
   );
@@ -141,8 +165,28 @@ const styles = {
     fontSize: "0.8rem",
     fontWeight: "bold",
   },
+  containerButtons: {
+    width: "100%",
+    justifyContent: "center",
+    margin: "0.8rem 0",
+    gap: "0.8rem",
+    display: "flex",
+    flexDirection: "row",
+  },
+  botaoAprovar: {
+    color: "#eee",
+    padding: "0.1rem",
+    backgroundColor: "#357ec7",
+    border: "1px solid #357ec7",
+  },
+  botaoRecusar: {
+    color: "#eee",
+    padding: "0.1rem",
+    backgroundColor: "#b22222",
+    border: "1px solid #b22222",
+  },
+
   statusPendente: {
-    
     color: "#856404",
   },
   statusAprovado: {
