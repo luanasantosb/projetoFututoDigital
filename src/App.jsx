@@ -7,6 +7,7 @@ import Details from "./pages/Details";
 import Checkout from "./pages/Checkout"
 import MeusPedidos from "./pages/MeusPedidos";
 import PrivateRoute from "./pages/PrivateRoute";
+import Dashboard from"./pages/Dashboard";
 
 
 function App() {
@@ -18,10 +19,10 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/meus-pedidos" element={<MeusPedidos />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/meuspedidos" element={<PrivateRoute><MeusPedidos />
+         <Route path="/checkout"element={<Checkout />}/>
+         <Route path="/dashboard" element={<Dashboard/>}/>
+         <Route path="/meuspedidos" element={<PrivateRoute><MeusPedidos />
         </PrivateRoute>} />
-         <Route path="/checkout"element={<PrivateRoute><Checkout />
-            </PrivateRoute>}/>
       </Routes>
   );
 }

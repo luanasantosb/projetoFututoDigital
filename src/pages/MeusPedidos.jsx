@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import '../styles.css';
 
 function MeusPedidos() {
   const navigate = useNavigate();
@@ -14,8 +15,8 @@ function MeusPedidos() {
   return (
     <div style={styles.container}>
       <div style={styles.buttonsContainer}>
-        <Link to="/checkout" style={styles.linkStyle}>
-          Ir para Checkout
+        <Link to="/" style={styles.linkStyle}>
+          Voltar ao inicio
         </Link>
 
         <button onClick={handleLogout} style={styles.button}>
@@ -23,31 +24,31 @@ function MeusPedidos() {
         </button>
       </div>
 
-      <h1 style={styles.h1}>Meus Pedidos</h1>
+      <h2 style={styles.h2}>Meus Pedidos</h2>
 
       {orders.length === 0 ? (
         <p>Você ainda não possui pedidos.</p>
       ) : (
-        <table style={styles.table}>
-          <thead>
+        <table style={styles.tabela}>
+          <thead style={styles.tabelaCabecalho}>
             <tr>
-              <th style={styles.th}>Serviço</th>
-              <th style={styles.th}>Pedido</th>
-              <th style={styles.th}>Data</th>
-              <th style={styles.th}>Horário</th>
-              <th style={styles.th}>Status</th>
-              <th style={styles.th}>Preço</th>
+              <th>Serviço</th>
+              <th>Pedido</th>
+              <th>Data</th>
+              <th>Horário</th>
+              <th>Status</th>
+              <th>Preço</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
               <tr key={order.id}>
-                <td style={styles.td}>{order.servico}</td>
-                <td style={styles.td}>#{order.id}</td>
-                <td style={styles.td}>{order.data}</td>
-                <td style={styles.td}>{order.horario}</td>
-                <td style={styles.td}>{order.status}</td>
-                <td style={styles.td}>R$ {order.preco}</td>
+                <td>{order.servico}</td>
+                <td>#{order.id}</td>
+                <td>{order.data}</td>
+                <td>{order.horario}</td>
+                <td>{order.status}</td>
+                <td>R$ {order.preco}</td>
               </tr>
             ))}
           </tbody>
@@ -60,25 +61,42 @@ function MeusPedidos() {
 export default MeusPedidos;
 
 const styles = {
-  container: {
-    padding: "2rem",
+  h2: {
+    margin: "1rem",
+    color: "#212121",
+    textTransform: "uppercase",
   },
 
-  table: {
-    width: "100%",
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    minHeight: "75vh",
+    padding: "2rem",
+    backgroundColor: "#F5F5F5",
+  },
+  tabela: {
+    width: "80%",
     borderCollapse: "collapse",
-    marginTop: "1rem",
+    backgroundColor: "#F5F5F5",
+    overflow: "hidden",
+  },
+   tabelaCabecalho: {
+    backgroundColor: "#0033FF",
+    color: "#F5F5F5",
   },
 
   th: {
-    backgroundColor:"#357ec7",
-    borderBottom: "2px solid #357ec7",
+    backgroundColor: "#0033FF",
+    borderBottom: "2px solid #0033FF",
     textAlign: "left",
-    padding: "4px",
+    padding: "0.5rem",
+    color: "#F5F5F5"
   },
 
   td: {
-    borderBottom: "1px solid #eee",
+    backgroundColor: "#F5F5F5",
+    borderBottom: "1px solid #F5F5F5",
     padding: "8px",
   },
 
@@ -96,10 +114,10 @@ const styles = {
     justifyContent: "center",
     width: "9rem",
     height: "2.2rem",
-    border: "1px solid #357ec7",
+    border: "1px solid #0033FF",
     borderRadius: "5px",
-    backgroundColor: "#357ec7",
-    color: "#f8f8ff",
+    backgroundColor: "#0033FF",
+    color: "#F5F5F5",
     cursor: "pointer",
     textDecoration: "none",
   },
@@ -111,15 +129,10 @@ const styles = {
     width: "5rem",
     height: "2.2rem",
     border: "1px solid #B22222",
-    borderRadius: "5px",
+    borderRadius: "0.5rem",
     backgroundColor: "#B22222",
-    color: "#f8f8ff",
+    color: "#F5F5F5",
     cursor: "pointer",
   },
 
-  h1: {
-    margin: "1.5rem 0",
-    color: "#212121",
-    textAlign: "center",
-  },
 };

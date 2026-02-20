@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import '../styles.css'
 
-export default function Details() {
+function Details() {
   const { id } = useParams();
 
 
@@ -60,6 +60,7 @@ export default function Details() {
     </div>
   );
 }
+export default Details;
 const styles = {
   container: {
     display: "flex",
@@ -71,17 +72,21 @@ const styles = {
   },
 
   linkStyle: {
+    whiteSpace: "nowrap",
+    display: "flex",
     alignSelf: "stretch",
-    width: "2.5rem",
+    gap: "0.5rem",
+    width: "3.5rem",
+    padding: "0.5rem",
+    margin: "0.25rem 0",
+    fontSize: "1rem",
     textAlign: "left",
-    border: "1px solid #357ec7",
-    borderRadius: "5px",
-    backgroundColor: "#357ec7",
-    color: "#f8f8ff",
-    padding: "0.3rem",
-    margin: "0.25rem",
-    cursor: "pointer",
     textDecoration: "none",
+    backgroundColor: "#0033FF",
+    border: "1px solid #0033FF",
+    borderRadius: "0.5rem",
+    color: "#F5F5F5",
+    cursor: "pointer",
   },
   h2: {
     margin: "0.5rem",

@@ -4,7 +4,7 @@ import ServiceCard from "../components/ServiceCard";
 import Menu from "../components/Menu";
 import '../styles.css'
 
-export default function Home() {
+function Home() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -60,8 +60,6 @@ export default function Home() {
                 Contratar
               </Link>
 
-
-
             </div>
           </div>
         ))}
@@ -69,7 +67,7 @@ export default function Home() {
     </div>
   );
 }
-
+export default Home;
 const styles = {
   grid: {
     display: "grid",
@@ -81,7 +79,7 @@ const styles = {
   h1: {
     margin: "1.5rem",
     paddingLeft: "2rem",
-    color: "#357ec7",
+    color: "#0033FF",
   },
 
   h2: {
@@ -96,7 +94,6 @@ const styles = {
   card: {
     borderRadius: "10px",
     padding: "1rem",
-    boxShadow: "0 2px 6px rgba(0.0.0.0,1)",
   },
 
   buttonsContainer: {
@@ -109,10 +106,10 @@ const styles = {
 
   linkStyle: {
     display: "inline-block",
-    border: "1px solid #357ec7",
-    borderRadius: "4px",
-    backgroundColor: "#357ec7",
-    color: "#f8f8ff",
+    border: "1px solid #0033FF",
+    borderRadius: "0.5rem",
+    backgroundColor: "#0033FF",
+    color: "#F5F5F5",
     padding: "0.5rem 1rem",
     margin: "0.25rem",
     textAlign: "center",

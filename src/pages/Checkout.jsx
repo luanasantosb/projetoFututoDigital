@@ -1,13 +1,18 @@
 import { useState } from "react";
+import { format } from "date-fns";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import '../styles.css';
 
-export default function Checkout() {
+function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const service = location.state?.service;
 
   const [date, setDate] = useState("");
+  const formattedDate = date
+    ? format(new Date(date), "dd-MM-yyyy")
+    : "";
   const [time, setTime] = useState("");
   const [error, setError] = useState("");
 
@@ -35,19 +40,17 @@ export default function Checkout() {
 
     const pedidosSalvos = JSON.parse(localStorage.getItem("orders") || "[]");
 
- 
-   const novoPedido = {
-  id: Date.now(),
-  servico: service.nome,
-  preco: service.preco,
-  data: date,
-  horario: time,
-  status: "Pendente",
-  email: JSON.parse(user).email
-};
 
+    const novoPedido = {
+      id: Date.now(),
+      servico: service.nome,
+      preco: service.preco,
+      data: date,
+      horario: time,
+      status: "Pendente",
+      email: JSON.parse(user).email
+    };
 
-  
     const pedidosAtualizados = [...pedidosSalvos, novoPedido];
 
 
@@ -67,7 +70,7 @@ export default function Checkout() {
 
   return (
     <div style={styles.container}>
-      <Link to="/" style={styles.linkStyle}>⬅ Voltar</Link>
+      <Link to="/" style={styles.linkStyle}> ⬅ Voltar</Link>
       <div style={styles.card}>
         <img
           src={service.imagem}
@@ -79,18 +82,20 @@ export default function Checkout() {
       </div>
 
       <form onSubmit={handleSubmit} style={styles.form}>
-        <label>
-          Data:
+        <label style={styles.label}>
+          Data
           <input
+            style={styles.input}
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
         </label>
 
-        <label>
-          Horário:
+        <label style={styles.label}>
+          Horário
           <input
+            style={styles.input}
             type="time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
@@ -106,7 +111,7 @@ export default function Checkout() {
     </div>
   );
 };
-
+export default Checkout;
 const styles = {
   container: {
     display: "flex",
@@ -116,17 +121,21 @@ const styles = {
     gap: "2rem",
   },
   linkStyle: {
+    whiteSpace: "nowrap",
+    display: "flex",
     alignSelf: "stretch",
-    width: "2.5rem",
+    gap: "0.5rem",
+    width: "3.5rem",
+    padding: "0.5rem",
+    margin: "0.25rem 0",
+    fontSize: "1rem",
     textAlign: "left",
-    border: "1px solid #357ec7",
-    borderRadius: "5px",
-    backgroundColor: "#357ec7",
-    color: "#f8f8ff",
-    padding: "0.3rem",
-    margin: "0.25rem",
-    cursor: "pointer",
     textDecoration: "none",
+    backgroundColor: "#0033FF",
+    border: "1px solid #0033FF",
+    borderRadius: "0.5rem",
+    color: "#F5F5F5",
+    cursor: "pointer",
   },
   card: {
     padding: "1rem",
@@ -137,7 +146,7 @@ const styles = {
     width: "100%",
     height: "150px",
     objectFit: "cover",
-    borderRadius: "4px",
+    borderRadius: "0.5rem",
   },
   form: {
     display: "flex",
@@ -145,12 +154,19 @@ const styles = {
     gap: "1rem",
     width: "250px",
   },
+  input: {
+    display: "block",
+    marginTop: "0.3rem",
+    color: "#212121",
+    border: "1px solid #0033FF",
+  },
   button: {
+    fontSize: "1rem",
     padding: "0.5rem",
-    backgroundColor: "#007fff",
+    backgroundColor: "#0033FF",
     color: "white",
     border: "none",
-    borderRadius: "4px",
+    borderRadius: "0.5rem",
     cursor: "pointer",
   },
   error: {

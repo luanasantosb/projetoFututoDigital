@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 import '../styles.css';
 
@@ -82,39 +81,40 @@ const styles = {
     width: "100%",
     maxWidth: "500px",
     padding: "2.5rem",
-    borderRadius: "5px",
+    borderRadius: "0.5rem",
     display: "flex",
     flexDirection: "column",
   },
   label: {
     fontSize: "1rem",
     marginBottom: "0.5rem",
-    color: "#333",
+    color: "#212121",
   },
-  input: {
+   input: {
+    backgroundColor:"#E1E1E1",
+    outline:"none",
+    border:"none",
     padding: "0.5rem",
-    borderRadius: "5px",
-    border: "1px solid #212121",
+    borderBottom: "1px solid #0033FF",
     marginBottom: "1rem",
     fontSize: "1rem",
-    color: "#333",
   },
   button: {
-    backgroundColor: "#357ec7",
-    color: "#f8f8ff",
+    backgroundColor: "#0033FF",
+    color: "#F5F5F5",
     padding: "0.5rem",
     border: "none",
     borderRadius: "0.5rem",
     cursor: "pointer",
     fontSize: "1rem",
     marginTop: "0.5rem",
-    width: "6rem",
+    width: "4rem",
   },
   registro: {
     textAlign: "center",
     marginTop: "1rem",
     textDecoration: "none",
-    color: "#357ec7",
+    color: "#0033FF",
     fontSize: "1rem",
   },
 

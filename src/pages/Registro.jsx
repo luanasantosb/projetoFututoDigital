@@ -1,7 +1,7 @@
 import Menu from "../components/Menu";
 import { Link } from "react-router-dom";
 import '../styles.css';
-export default function Registro() {
+function Registro() {
   return (
     <div>
       <Menu />
@@ -38,6 +38,7 @@ export default function Registro() {
     </div>
   );
 }
+export default Registro;
 
 const styles = {
     container: {
@@ -55,7 +56,6 @@ const styles = {
   },
   form: {
     marginTop:"0",
-    border:"1px solid red",
     width: "100%",
     maxWidth: "500px",
     padding: "1rem",
@@ -69,17 +69,17 @@ const styles = {
     marginTop: "1rem",
   },
    input: {
-    backgroundColor:"#e8e8e8",
+    backgroundColor:"#E1E1E1",
     outline:"none",
     border:"none",
     padding: "0.5rem",
-    borderBottom: "1px solid #357ec7",
+    borderBottom: "1px solid #0033FF",
     marginBottom: "1rem",
     fontSize: "1rem",
   },
   button: {
-    backgroundColor: "#357ec7",
-    color: "#f8f8ff",
+    backgroundColor: "#0033FF",
+    color: "#F5F5F5",
     padding: "0.5rem",
     border: "none",
     borderRadius: "0.5rem",
@@ -92,7 +92,7 @@ const styles = {
     textAlign: "center",
     marginTop:"1rem",
     textDecoration:"none",
-    color:"#357ec7",
+    color:"#0033FF",
     fontSize:"1rem",
   },
 

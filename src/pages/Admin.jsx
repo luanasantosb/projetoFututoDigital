@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Menu from "../components/Menu";
 import '../styles.css';
 
-export default function Admin() {
+function Admin() {
   const [pedidos, setPedidos] = useState([]);
 
   useEffect(() => {
@@ -89,20 +89,13 @@ export default function Admin() {
                   </td>
                   <td>
                     {pedido.status === "Pendente" && (
+                      
                       <div style={styles.containerButtons}>
-                        <button
-                          onClick={() => aprovarPedido(pedido.id)}
-                          style={styles.botaoAprovar}
-                        >
-                          Aprovar
-                        </button>
+                        <button onClick={() => aprovarPedido(pedido.id)} style={styles.botaoAprovar}>
+                          Aprovar </button>
 
-                        <button
-                          onClick={() => recusarPedido(pedido.id)}
-                          style={styles.botaoRecusar}
-                        >
-                          Recusar
-                        </button>
+                        <button onClick={() => recusarPedido(pedido.id)} style={styles.botaoRecusar}>
+                          Recusar </button>
                       </div>
                     )}
                   </td>
@@ -117,6 +110,7 @@ export default function Admin() {
     </div>
   );
 }
+export default Admin;
 
 const styles = {
   container: {
@@ -125,7 +119,7 @@ const styles = {
     alignItems: "center",
     minHeight: "75vh",
     padding: "2rem",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#F5F5F5",
   },
   h2: {
     margin: "1rem",
@@ -134,30 +128,28 @@ const styles = {
   },
   paragrafo: {
     fontSize: "1rem",
-    color: "#555",
+    color: "#212121",
     marginBottom: "1rem",
   },
   input: {
     width: "80%",
     padding: "0.7rem",
     marginBottom: "1.5rem",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
+    border: "1px solid #212121",
   },
   tabela: {
     width: "80%",
     borderCollapse: "collapse",
-    backgroundColor: "#fff",
-    borderRadius: "8px",
+    backgroundColor: "#F5F5F5",
     overflow: "hidden",
   },
   tabelaCabecalho: {
-    backgroundColor: "#357ec7",
-    color: "#fff",
+    backgroundColor: "#0033FF",
+    color: "#F5F5F5",
   },
   tabelaLinha: {
     textAlign: "center",
-    borderBottom: "1px solid #eee",
+    borderBottom: "1px solid #0033FF",
   },
   statusBase: {
     padding: "6px 10px",
@@ -174,16 +166,16 @@ const styles = {
     flexDirection: "row",
   },
   botaoAprovar: {
-    color: "#eee",
+    color: "#FFF",
     padding: "0.1rem",
-    backgroundColor: "#357ec7",
-    border: "1px solid #357ec7",
+    backgroundColor: "#0033FF",
+    border: "1px solid #0033FF",
   },
   botaoRecusar: {
-    color: "#eee",
+    color: "#FFF",
     padding: "0.1rem",
-    backgroundColor: "#b22222",
-    border: "1px solid #b22222",
+    backgroundColor: "#B22222",
+    border: "1px solid #B22222",
   },
 
   statusPendente: {

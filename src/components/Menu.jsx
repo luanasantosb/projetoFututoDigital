@@ -20,7 +20,7 @@ export default function Menu() {
           <Link style={styles.link} to="/registro">Registro</Link>
         </li>
         <li style={styles.li}>
-          <Link style={styles.link} to="/checkout">Checkout</Link>
+          <Link style={styles.link} to="/dashboard">Dashboard</Link>
         </li>
       </ul>
     </nav>
@@ -32,7 +32,7 @@ const styles = {
      display: "flex",
     justifyContent:"center",
     padding: "1rem",
-    backgroundColor: "#357ec7",
+    backgroundColor: "#0033FF",
   },
   ul: {
     listStyle: "none",
@@ -43,7 +43,7 @@ const styles = {
   },
   li: {},
   link: {
-    color: "#f8f8ff",
+    color: "#f5f5f5",
     textDecoration: "none",
     fontWeight: "bold",
   },
