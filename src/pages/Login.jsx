@@ -1,4 +1,5 @@
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Menu from "../components/Menu";
 import '../styles.css';
@@ -7,6 +8,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const message = location.state?.message;
 
   function handleLogin(e) {
     e.preventDefault();
@@ -90,10 +93,10 @@ const styles = {
     marginBottom: "0.5rem",
     color: "#212121",
   },
-   input: {
-    backgroundColor:"#E1E1E1",
-    outline:"none",
-    border:"none",
+  input: {
+    backgroundColor: "#E1E1E1",
+    outline: "none",
+    border: "none",
     padding: "0.5rem",
     borderBottom: "1px solid #0033FF",
     marginBottom: "1rem",

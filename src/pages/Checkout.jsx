@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { format } from "date-fns";
+import Menu from "../components/Menu";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import '../styles.css';
+import "../styles.css";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -10,11 +11,10 @@ function Checkout() {
   const service = location.state?.service;
 
   const [date, setDate] = useState("");
-  const formattedDate = date
-    ? format(new Date(date), "dd-MM-yyyy")
-    : "";
   const [time, setTime] = useState("");
   const [error, setError] = useState("");
+
+  const formattedDate = date ? format(new Date(date), "dd-MM-yyyy") : "";
 
   if (!service) {
     return <p>Serviço não encontrado.</p>;
@@ -29,93 +29,100 @@ function Checkout() {
     }
 
     const user = localStorage.getItem("user");
-
     if (!user) {
-      navigate("/login", {
-        state: { date, time, service },
-      });
+      setError("Você precisa estar logado para agendar um serviço.");
       return;
     }
 
+    setError("");
 
+    const userData = JSON.parse(user);
     const pedidosSalvos = JSON.parse(localStorage.getItem("orders") || "[]");
-
 
     const novoPedido = {
       id: Date.now(),
       servico: service.nome,
       preco: service.preco,
-      data: date,
+      data: formattedDate,
       horario: time,
       status: "Pendente",
-      email: JSON.parse(user).email
+      email: userData.email,
     };
 
     const pedidosAtualizados = [...pedidosSalvos, novoPedido];
-
-
     localStorage.setItem("orders", JSON.stringify(pedidosAtualizados));
-
 
     setDate("");
     setTime("");
 
-
-    navigate("/meuspedidos");
+    navigate("/meus-pedidos");
 
     alert(
-      `Agendamento para ${service.nome} em ${date} às ${time}, veja o status em meus pedidos.`
+      `Agendamento para ${service.nome} em ${formattedDate} às ${time} realizado com sucesso!`
     );
   };
 
   return (
+      <div>
+        <Menu />
     <div style={styles.container}>
-      <Link to="/" style={styles.linkStyle}> ⬅ Voltar</Link>
-      <div style={styles.card}>
-        <img
-          src={service.imagem}
-          alt={service.nome}
-          style={styles.image}
-        />
-        <h3>{service.nome}</h3>
-        <p>R$ {service.preco}</p>
+      <Link to="/" style={styles.linkStyle}>
+        ⬅ Voltar
+      </Link>
+    
+        <div style={styles.card}>
+          <img
+            src={service.imagem}
+            alt={service.nome}
+            style={styles.image}
+          />
+          <h3>{service.nome}</h3>
+          <p>
+            {Number(service.preco).toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <label style={styles.label}>
+            Data
+            <input
+              style={styles.input}
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </label>
+
+          <label style={styles.label}>
+            Horário
+            <input
+              style={styles.input}
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
+          </label>
+
+          {error && <p style={styles.error}>{error}</p>}
+
+          <button type="submit" style={styles.button}>
+            Agendar
+          </button>
+        </form>
       </div>
-
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label style={styles.label}>
-          Data
-          <input
-            style={styles.input}
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </label>
-
-        <label style={styles.label}>
-          Horário
-          <input
-            style={styles.input}
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-        </label>
-
-        {error && <p style={styles.error}>{error}</p>}
-
-        <button type="submit" style={styles.button}>
-          Agendar
-        </button>
-      </form>
     </div>
   );
-};
+}
+
 export default Checkout;
+
 const styles = {
   container: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
     padding: "2rem",
     gap: "2rem",
@@ -126,6 +133,7 @@ const styles = {
     alignSelf: "stretch",
     gap: "0.5rem",
     width: "3.5rem",
+    height:"1rem",
     padding: "0.5rem",
     margin: "0.25rem 0",
     fontSize: "1rem",
@@ -138,6 +146,9 @@ const styles = {
     cursor: "pointer",
   },
   card: {
+    border:"1px solid red",
+    display:"flex",
+    flexDirection:"column",
     padding: "1rem",
     textAlign: "center",
     width: "250px",
@@ -170,6 +181,6 @@ const styles = {
     cursor: "pointer",
   },
   error: {
-    color: "red",
+    color: "#B22222",
   },
 };
