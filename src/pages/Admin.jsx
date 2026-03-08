@@ -10,7 +10,6 @@ function Admin() {
     setPedidos(pedidosSalvos);
   }, []);
 
-
   const getStatusStyle = (status) => {
     switch (status) {
       case "Pendente":
@@ -45,10 +44,21 @@ function Admin() {
     localStorage.setItem("orders", JSON.stringify(pedidosAtualizados));
   }
 
+      function handleLogout() {
+    localStorage.removeItem("user");
+    navigate("/login");
+  }
+
   return (
     <div>
       <Menu />
       <div style={styles.container}>
+        <div style={styles.buttonsContainer}>
+        <button onClick={handleLogout} style={styles.button}>
+          Logout
+        </button>
+      </div>
+
         <h2 style={styles.h2}>Pedidos Recentes</h2>
         <p style={styles.paragrafo}>
           Aqui você pode visualizar todos os pedidos cadastrados.
@@ -187,6 +197,26 @@ const styles = {
   },
   statusFinalizado: {
     color: "#004085",
+  },
+    buttonsContainer: {
+    width: "100%",
+    justifyContent: "flex-start",
+    margin: "0.8rem 0",
+    gap: "0.8rem",
+    display: "flex",
+    flexDirection: "row",
+  },
+  button: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "5rem",
+    height: "2.2rem",
+    border: "1px solid #B22222",
+    borderRadius: "0.5rem",
+    backgroundColor: "#B22222",
+    color: "#F5F5F5",
+    cursor: "pointer",
   },
 };
 

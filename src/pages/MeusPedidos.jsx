@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import '../styles.css';
+import Menu from "../components/Menu";
 
 function MeusPedidos() {
   const navigate = useNavigate();
@@ -13,12 +13,10 @@ function MeusPedidos() {
   }
 
   return (
+    <div>
+     < Menu />
     <div style={styles.container}>
       <div style={styles.buttonsContainer}>
-        <Link to="/" style={styles.linkStyle}>
-          Voltar ao inicio
-        </Link>
-
         <button onClick={handleLogout} style={styles.button}>
           Logout
         </button>
@@ -54,6 +52,7 @@ function MeusPedidos() {
           </tbody>
         </table>
       )}
+    </div>
     </div>
   );
 }
@@ -108,20 +107,6 @@ const styles = {
     display: "flex",
     flexDirection: "row",
   },
-  linkStyle: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "9rem",
-    height: "2.2rem",
-    border: "1px solid #0033FF",
-    borderRadius: "5px",
-    backgroundColor: "#0033FF",
-    color: "#F5F5F5",
-    cursor: "pointer",
-    textDecoration: "none",
-  },
-
   button: {
     display: "flex",
     alignItems: "center",

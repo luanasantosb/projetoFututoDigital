@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Menu from "../components/Menu";
+import Checkout from "./Checkout";
 import '../styles.css';
 
 function Login() {

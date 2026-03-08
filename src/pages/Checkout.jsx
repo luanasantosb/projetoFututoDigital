@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import Menu from "../components/Menu";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles.css";
 
 function Checkout() {
@@ -55,7 +55,7 @@ function Checkout() {
     setDate("");
     setTime("");
 
-    navigate("/meus-pedidos");
+    navigate("/meuspedidos");
 
     alert(
       `Agendamento para ${service.nome} em ${formattedDate} às ${time} realizado com sucesso!`
@@ -63,31 +63,28 @@ function Checkout() {
   };
 
   return (
-      <div>
-        <Menu />
-    <div style={styles.container}>
-      <Link to="/" style={styles.linkStyle}>
-        ⬅ Voltar
-      </Link>
-    
-        <div style={styles.card}>
+    <div>
+      <Menu />
+      <div style={styles.container}>
+
+        <h2 style={styles.h2}>{service.nome}</h2>
+        {service.imagem && (
           <img
             src={service.imagem}
             alt={service.nome}
-            style={styles.image}
+            style={styles.imageStyle}
           />
-          <h3>{service.nome}</h3>
-          <p>
-            {Number(service.preco).toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </p>
-        </div>
+        )}
+
+        <p style={styles.preco}>
+          {Number(service.preco).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}
+        </p>
 
         <form onSubmit={handleSubmit} style={styles.form}>
-          <label style={styles.label}>
-            Data
+          <label style={styles.label}>Data
             <input
               style={styles.input}
               type="date"
@@ -116,60 +113,52 @@ function Checkout() {
     </div>
   );
 }
-
 export default Checkout;
 
 const styles = {
   container: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    padding: "2rem",
-    gap: "2rem",
-  },
-  linkStyle: {
-    whiteSpace: "nowrap",
-    display: "flex",
-    alignSelf: "stretch",
-    gap: "0.5rem",
-    width: "3.5rem",
-    height:"1rem",
-    padding: "0.5rem",
-    margin: "0.25rem 0",
-    fontSize: "1rem",
-    textAlign: "left",
-    textDecoration: "none",
-    backgroundColor: "#0033FF",
-    border: "1px solid #0033FF",
-    borderRadius: "0.5rem",
-    color: "#F5F5F5",
-    cursor: "pointer",
-  },
-  card: {
-    border:"1px solid red",
-    display:"flex",
-    flexDirection:"column",
+    minHeight: "75vh",
     padding: "1rem",
-    textAlign: "center",
-    width: "250px",
   },
-  image: {
-    width: "100%",
-    height: "150px",
-    objectFit: "cover",
-    borderRadius: "0.5rem",
+  h2: {
+    margin: "1rem",
+    textTransform: "uppercase",
+    color: "#212121",
+  },
+  imageStyle: {
+    width: "300px",
+    borderRadius: "10px",
+  },
+  preco: {
+    fontSize:"1.5rem",
+    margin: "1.5rem",
+    fontWeight: "700",
   },
   form: {
+    padding:"1rem",
     display: "flex",
     flexDirection: "column",
     gap: "1rem",
     width: "250px",
   },
+  label:{
+    textAlign:"center",
+    fontSize:"1.2rem",
+    fontWeight: "700",
+  },
   input: {
+    width:"15rem",
+    height:"1.8rem",
+    border:"none",
+    fontSize:"1rem",
     display: "block",
     marginTop: "0.3rem",
     color: "#212121",
-    border: "1px solid #0033FF",
+    borderBottom: "1px solid #0033FF",
   },
   button: {
     fontSize: "1rem",

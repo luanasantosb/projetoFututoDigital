@@ -1,10 +1,18 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 import "../styles.css";
 
 function Dashboard() {
   const [data, setData] = useState({ total: 0 });
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem("user");
+    navigate("/login");
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,10 +32,12 @@ function Dashboard() {
         const result = await res.json();
         console.log("API result:", result);
 
-        setData(result.record || { total: 0 });
+        setData(result.record?.[0] || { total: 0 });
       } catch (err) {
         console.error("Fetch error:", err);
-        setData({ total: 0 });
+        setData({
+          total: Number(result.record?.[0]?.total || 0),
+        });
       } finally {
         setLoading(false);
       }
@@ -42,14 +52,19 @@ function Dashboard() {
     <div>
       <Menu />
       <div style={styles.container}>
-        {/* CARD FATURAMENTO */}
+        <div style={styles.buttonsContainer}>
+          <button onClick={handleLogout} style={styles.button}>
+            Logout
+          </button>
+        </div>
+
         <div style={styles.card}>
           <h3>Faturamento Total</h3>
           <h2>
-            {data?.total?.toLocaleString("pt-BR", {
+            {Number(data?.total || 0).toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",
-            }) || "R$ 0,00"}
+            })}
           </h2>
         </div>
       </div>
@@ -76,5 +91,25 @@ const styles = {
     padding: "1.5rem",
     borderRadius: "0.5rem",
     backgroundColor: "#F5F5F5",
+  },
+  buttonsContainer: {
+    width: "100%",
+    justifyContent: "flex-start",
+    margin: "0.8rem 0",
+    gap: "0.8rem",
+    display: "flex",
+    flexDirection: "row",
+  },
+  button: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "5rem",
+    height: "2.2rem",
+    border: "1px solid #B22222",
+    borderRadius: "0.5rem",
+    backgroundColor: "#B22222",
+    color: "#F5F5F5",
+    cursor: "pointer",
   },
 };

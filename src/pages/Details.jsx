@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import '../styles.css'
+import Menu from "../components/Menu";
+
 
 function Details() {
   const { id } = useParams();
@@ -43,20 +45,20 @@ function Details() {
   if (!service) return <p>Serviço não encontrado.</p>;
 
   return (
-
-    <div style={styles.container}>
-      <Link to="/" style={styles.linkStyle}>⬅ Voltar</Link>
-      <h2 style={styles.h2}>{service.nome}</h2>
-      {service.imagem && (
-        <img
-          src={service.imagem}
-          alt={service.nome}
-          style={styles.imageStyle}
-        />
-      )}
-
-      <p style={styles.preco}>Preço: R$ {service.preco}</p>
-      <p>{service.detalhes}</p>
+    <div>
+      <Menu />
+      <div style={styles.container}>
+        <h2 style={styles.h2}>{service.nome}</h2>
+        {service.imagem && (
+          <img
+            src={service.imagem}
+            alt={service.nome}
+            style={styles.imageStyle}
+          />
+        )}
+        <p style={styles.preco}>Preço: R$ {service.preco}</p>
+        <p>{service.detalhes}</p>
+      </div>
     </div>
   );
 }
@@ -69,24 +71,6 @@ const styles = {
     alignItems: "center",
     minHeight: "75vh",
     padding: "1rem",
-  },
-
-  linkStyle: {
-    whiteSpace: "nowrap",
-    display: "flex",
-    alignSelf: "stretch",
-    gap: "0.5rem",
-    width: "3.5rem",
-    padding: "0.5rem",
-    margin: "0.25rem 0",
-    fontSize: "1rem",
-    textAlign: "left",
-    textDecoration: "none",
-    backgroundColor: "#0033FF",
-    border: "1px solid #0033FF",
-    borderRadius: "0.5rem",
-    color: "#F5F5F5",
-    cursor: "pointer",
   },
   h2: {
     margin: "0.5rem",

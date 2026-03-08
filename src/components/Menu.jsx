@@ -14,7 +14,7 @@ export default function Menu() {
           <Link style={styles.link} to="/admin">Admin</Link>
         </li>
         <li style={styles.li}>
-          <Link style={styles.link} to="/meus-pedidos">Meus Pedidos</Link>
+          <Link style={styles.link} to="/meuspedidos">Meus Pedidos</Link>
         </li>
         <li style={styles.li}>
           <Link style={styles.link} to="/registro">Registro</Link>
@@ -31,17 +31,17 @@ const styles = {
   nav: {
      display: "flex",
     justifyContent:"center",
-    padding: "1rem",
+    padding: "2rem",
     backgroundColor: "#0033FF",
   },
   ul: {
+    fontSize:"1.5rem",
     listStyle: "none",
     display: "flex",
     gap: "1rem",
     margin: 0,
     padding: 0,
   },
-  li: {},
   link: {
     color: "#f5f5f5",
     textDecoration: "none",
