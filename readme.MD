@@ -35,7 +35,3 @@ Para este projeto, utilizei as seguintes tecnologias:
 ☁️ Vercel (Deploy)
 
 🗄️ JSONBin (API Mock)
-
-## 📸 Visual do Projeto
-
-Aqui você pode ver uma prévia de como o site ficou:
